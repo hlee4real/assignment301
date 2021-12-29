@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{# {% if set != null %} #}
+<table class="table table-responsive-md mt-3">
+<thead>
+<tr>
+    <td>Set ID</td>
+    <td>Set Name</td>
+    <td>Actions</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>{{ set.id }}</td>
+    <td>{{ set.setname }}</td>
+    <td>
+        <a href="">Edit</a>
+        <a href="">Delete</a>
+    </td>
+</tr>
+</tbody>
+</table>
+{# {% else %} 
+<h3>Set not exist</h3>
+{% endif %}
+#}
+{% endblock %}

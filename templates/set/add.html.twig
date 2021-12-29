@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-md-6 mt-3 mb-3">
+   <h2 class="text-center">ADD NEW SET</h2>
+   <div class="col md-6"></div>
+      {{ form_start (setForm) }}
+         <div class="form-group">
+            {{ form_label (setForm.setName)}}
+            {{ form_widget (setForm.setName ,
+               {
+                  'attr' : {'class' : 'form-control'}
+               })
+            }}
+         </div>
+      <div class="form-group text-center mt-3">
+         <input class="btn btn-primary" type="submit" value="Add" />
+      </div>
+      {{ form_end (setForm)}}
+   </div>
+</div>
+{% endblock %}

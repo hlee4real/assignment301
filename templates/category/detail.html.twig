@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{# {% if category != null %} #}
+<table class="table table-responsive-md mt-3">
+<thead>
+<tr>
+    <td>Category ID</td>
+    <td>Category Name</td>
+    <td>Actions</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>{{ category.id }}</td>
+    <td>{{ category.categoryname }}</td>
+    <td>
+        <a href="">Edit</a>
+        <a href="">Delete</a>
+    </td>
+</tr>
+</tbody>
+</table>
+{# {% else %} 
+<h3>Category not exist</h3>
+{% endif %}
+#}
+{% endblock %}

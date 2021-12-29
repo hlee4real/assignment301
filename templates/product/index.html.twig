@@ -2,14 +2,64 @@
 
 
 {% block body %}
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+    <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+    <li><a href="{{ path('category_view_all') }}" class="nav-link px-2 link-dark">Category</a></li>
+    <li><a href="{{ path('set_view_all') }}" class="nav-link px-2 link-dark">Set</a></li>
+    <li><a href="{{ path('view_cart') }}" class="nav-link px-2 link-dark">Cart</a></li>
+    <li><a href="{{ path('view_bill') }}" class="nav-link px-2 link-dark">Bill</a></li>
+</ul>
+<div class="col-md-3 text-end">
+    <a href="{{ path('app_logout') }}" class="btn btn-outline-primary me-2">Logout</a>
+</div>
+</header>
+{% if is_granted("ROLE_ADMIN") %}
+<div class="d-flex justify-content-center">
+    <a class="btn btn-primary" href="{{ path('product_add') }}">
+        Add Product
+    </a>
+</div>
+{% endif %}
 {% for product in products %}
+<table class="table table-striped">
+<thead>
+    <tr>   
+        <td><b>Product ID</b></td>
+        <td><b>Product Name</b></td>
+        <td><b>Product Price</b></td>
+        <td><b>Product Quantity</b></td>
+        <td><b>Product Image</b></td>
+        <td><b>Product Description</b></td>
+        <td><b>Actions</b></td>
+    </tr>
+</thead>
+<tbody>
 <tr>
-    <td> {{ product.id }} </td>
+    <td><a href="{{ path('products_view_by_id', {'id': product.id }) }}"> {{ product.id }} </a></td>
     <td> {{ product.name }} </td>
     <td> {{ product.price }} $</td>
     <td> {{ product.quantity }} </td>
-    <td> {{ product.image }} </td>
+    <td>
+        <a href="{{ path('products_view_by_id', {'id': product.id }) }}">
+            <img src="{{ asset('images/'~product.image) }}" width="100" height="120">   
+        </a> 
+    </td>
     <td> {{ product.description }} </td>
+    <td>
+        {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('products_delete', {'id': product.id }) }}" class="btn btn-danger" onclick="return confirm('do you want to delete this product?')">Delete</a>
+        <a href="{{ path('products_edit', {'id': product.id }) }}" class="btn btn-warning">Edit</a>
+        {% endif %}
+        {% if is_granted("ROLE_USER") %}
+        <a href="{{ path('cart_add', {'id': product.id }) }}" class="btn btn-primary">Add To Cart</a>
+        {% endif %}
+    </td>
 </tr>
+</tbody>
+</table>
 {% endfor %}
 {% endblock %}
