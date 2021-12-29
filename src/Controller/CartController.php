@@ -81,12 +81,12 @@ class CartController extends AbstractController
         $cart = $this->em->getRepository(Cart::class)->find($id);
         $manager = $this->em->getManager();
         $price = $cart->getPrice();
-        $bill = $this->em->getRepository(Bill::class)->find(4);
+        $bill = $this->em->getRepository(Bill::class)->find(6);
         $currentTotal = $bill->getTotal();
         $bill->setTotal($price + $currentTotal);
         $bill->setEmail($username);
         $bill->setStatus('Pending');
-        $bill->setDate(\DateTime::createFromFormat('d-m-Y', '28-12-2021'));
+        $bill->setDate(\DateTime::createFromFormat('d-m-Y', '29-12-2021'));
 
         $manager->persist($bill);
         $manager->remove($cart);
